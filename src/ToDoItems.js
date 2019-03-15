@@ -3,10 +3,11 @@ import React, { Component } from 'react';
 
 class ToDoItems extends Component {
 	
+	// creates each list item
 	createTasks = (item) => {
 		return (
 			<li key={item.key} >
-				<input type="checkbox"/>
+				<input type="checkbox" onChange={() => this.props.strikeItem(item)}/>
 				{item.text}
 			</li>
 		)

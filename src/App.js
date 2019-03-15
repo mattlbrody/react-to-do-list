@@ -3,27 +3,30 @@ import ToDoList from './ToDoList';
 import ToDoItems from './ToDoItems';
 
 class App extends Component {
-  state = { items: [], currentItem: {text:'', key:'' }};
+  state = { items: [], currentItem: {text:'', key:'' }}
 
+  // passes the input and a unique key into the currentItem state
   handleInput = e => {
     const itemText = e.target.value;
     const currentItem = { text: itemText, key: Date.now() };
     this.setState({ currentItem });
   }
 
-  addItem = (e) => {
+  // Create the new item in the to do list
+  addItem = e => {
     e.preventDefault()
     const newItem = this.state.currentItem;
-    // if the input is not empty
     if(newItem.text !== '') {
-      // create a var containing the new item in the items array
       const items = [...this.state.items, newItem];
-      // update the items state to contain the new item
       this.setState({
         items: items,
         currentItem: {text: '', key: '' }
       })
     }
+  }
+
+  strikeItem = item => {
+    console.log(item)
   }
 
   render() {
@@ -37,6 +40,7 @@ class App extends Component {
         />
         <ToDoItems 
           listOfItems={this.state.items}
+          strikeItem={this.strikeItem}
         />
       </div>
     );
