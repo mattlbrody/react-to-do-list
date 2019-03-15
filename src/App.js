@@ -1,25 +1,26 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import ToDoList from './ToDoList'
 
 class App extends Component {
+  state = { item: '', booklist: [] };
+
+  onFormSubmit = (event) => {
+    event.preventDefault();
+    this.setState({ booklist: this.state.item})
+  }
+
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+      <div>
+        <form onSubmit={this.onFormSubmit}>
+          <input 
+            value={this.state.item}
+            onChange={e => this.setState({ item: e.target.value })}
+          />
+          <button>Add Item</button>
+        </form>
+        <ToDoList />
       </div>
     );
   }
